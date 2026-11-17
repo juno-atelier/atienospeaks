@@ -99,21 +99,46 @@
           mask-image: var(--mask-fade);
 }
 
-/* ≤900px: the cut-out sits behind the copy; the subhead gets a
-   translucent cream chip so it stays legible over the photo.     */
+/* ≤900px: a vertical stack, nothing overlaps. Copy on clean cream
+   first (no chip), buttons full-width, then the cut-out portrait in
+   normal flow, full-width, unfaded, whole figure in view. A small
+   cream band under her keeps the gold hairline off her figure. The
+   gold glow is re-anchored to pool behind the stacked portrait.
+   parallax.js drifts the <picture> up by ≤ 6% of its height (the
+   full-width portrait is ~0.92 × 100vw tall → ≤ ~5.5vw), so the
+   figure's margin-top is 2rem + 6vw: a ≥ 2rem gap to the buttons
+   survives the largest drift.                                      */
 @media (max-width: 900px) {
-  .hero { align-items: flex-start; padding-top: calc(var(--nav-height) + 2rem); }
-  .hero-portrait {
-    height: min(70svh, 560px);
-    right: clamp(-6rem, -12vw, -2rem);
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+    padding-top: calc(var(--nav-height) + 2rem);
+    padding-bottom: var(--gap);
+    background:
+      radial-gradient(70% 34% at 50% 80%, var(--glow-gold), transparent 72%),
+      radial-gradient(50% 24% at 96% 8%, var(--glow-blue), transparent 72%),
+      var(--cream);
   }
-  .hero-sub {
-    display: inline-block;
-    background: var(--cream-chip);
-    padding: 0.7rem 1rem;
-    border-radius: var(--r-sm);
-    -webkit-backdrop-filter: blur(6px);
-            backdrop-filter: blur(6px);
+
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+
+  .hero-portrait {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    margin-top: calc(2rem + 6vw);
+  }
+  .hero-portrait picture { height: auto; }
+  .hero-portrait img {
+    height: auto;
+    object-position: center bottom;
+    -webkit-mask-image: none;
+            mask-image: none;
   }
 }
 

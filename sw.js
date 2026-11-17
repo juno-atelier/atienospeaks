@@ -4,7 +4,7 @@
    Bump CACHE_NAME whenever a cached file changes.
    ============================================================ */
 
-const CACHE_NAME = "atieno-v8";
+const CACHE_NAME = "atieno-v9";
 
 // Every file in main.js's import graph + first-paint assets.
 // cache.addAll() is atomic: ONE missing file fails the whole install,
