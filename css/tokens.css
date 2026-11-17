@@ -1,0 +1,154 @@
+/* ============================================================
+   tokens.css — DESIGN TOKENS ONLY
+   The single source of truth for every colour, type, space,
+   radius and shadow value. Retheme the whole site from here.
+   No raw hex lives anywhere else in the CSS.
+   ============================================================ */
+
+:root {
+  /* ---- Brand palette (from the Atienospeaks logo) ---- */
+  --navy-ink:      #0A1A33;   /* deepest navy — hero + footer grounds   */
+  --navy:          #10244A;   /* primary navy — dark sections           */
+  --navy-primary:  #16335F;   /* headings, nav text                     */
+  --blue-royal:    #23579E;   /* secondary blue — links, accents        */
+
+  --gold:          #C8A14A;   /* metallic gold — CTAs, dividers         */
+  --gold-deep:     #A5812F;   /* pressed / shaded gold                  */
+  --gold-light:    #E6C878;   /* highlight gold — hover, glints         */
+
+  /* ---- Neutrals ---- */
+  --ivory:         #F7F2E8;   /* warm section background                */
+  --cream:         #FBF8F1;   /* lightest warm background               */
+  --slate:         #5C6373;   /* body copy on light                     */
+  --charcoal:      #1C1F26;   /* near-black text                        */
+  --white:         #FFFFFF;
+
+  /* ---- Lines & veils ---- */
+  --line:          rgba(16, 36, 74, 0.12);
+  --line-on-navy:  rgba(247, 242, 232, 0.16);
+  --gold-veil:     rgba(200, 161, 74, 0.14);
+  --navy-veil:     rgba(10, 26, 51, 0.55);
+  --wood-overlay:  rgba(8, 22, 46, 0.82);   /* tint over the wood texture */
+
+  /* ---- On-colour text ---- */
+  --on-navy:       #ECE6D8;
+  --on-navy-soft:  rgba(236, 230, 216, 0.72);
+
+  /* ---- Light editorial hero ---- */
+  --hero-ink:      var(--navy-primary);           /* wordmark + nav text     */
+  --hero-ink-soft: var(--slate);                  /* subhead on cream        */
+  --hero-accent:   var(--gold-deep);              /* "speaks" — AA-large on cream */
+  --glow-gold:     rgba(200, 161, 74, 0.30);      /* warm pool behind portrait */
+  --glow-blue:     rgba(35, 87, 158, 0.10);       /* faint cool echo         */
+  --cream-chip:    rgba(251, 248, 241, 0.80);     /* mobile subhead chip     */
+  --mask-fade:     linear-gradient(to bottom, #000 58%, transparent 97%);
+  --hairline-gold: linear-gradient(90deg, transparent, var(--gold) 18%,
+                                   var(--gold-light) 50%, var(--gold) 82%, transparent);
+
+  /* ---- Journey corridor (vintage courthouse hall) ---- */
+  --corridor-ground: #061024;                     /* darker than --navy-ink  */
+  --wall:            #0F2244;                     /* side walls, near        */
+  --wall-far:        #1B2940;                     /* side walls, by the door */
+  --wainscot:        rgba(4, 10, 24, 0.45);       /* lower panelling         */
+  --wainscot-line:   rgba(200, 161, 74, 0.38);    /* gold rails              */
+  --pilaster:        #172E55;
+  --pilaster-shade:  rgba(3, 8, 20, 0.55);
+  --ceiling:         #0A1830;
+  --coffer-line:     rgba(200, 161, 74, 0.16);
+  --parquet-a:       rgba(92, 58, 30, 0.55);      /* tints over --wood-url   */
+  --parquet-b:       rgba(58, 34, 16, 0.65);
+  --parquet-seam:    rgba(10, 6, 2, 0.55);
+  --runner:          rgba(200, 161, 74, 0.26);    /* gold centre runner      */
+  --runner-edge:     var(--gold);
+  --sconce-glow:     rgba(255, 214, 140, 0.55);
+  --chandelier-core: rgba(255, 240, 200, 0.95);
+  --chandelier-glow: rgba(230, 200, 120, 0.35);
+  --arch-core:       #FFF3D1;                     /* doorway light           */
+  --arch-glow:       rgba(230, 200, 120, 0.85);
+  --arch-halo:       rgba(230, 200, 120, 0.28);
+  --arch-rim:        var(--gold-deep);
+  --haze:            rgba(230, 200, 120, 0.12);
+  --vignette:        rgba(2, 6, 14, 0.55);
+  --plane-shade:     var(--vignette);            /* vignette baked into the near ends of floor/ceiling/walls */
+  --letterbox:       #02060E;
+  --spotlight:       rgba(255, 230, 170, 0.30);
+  --light-sweep:     rgba(255, 248, 225, 0.35);
+
+  /* ---- Gold frames + brass plaques ---- */
+  --frame-edge:       var(--gold-deep);
+  --frame-beading:    var(--gold-light);
+  --frame-liner:      #1B1206;
+  --frame-matte:      #0B1830;
+  --frame-matte-lift: #16294A;
+  --frame-shadow:     0 18px 40px rgba(0, 0, 0, 0.45);
+  --brass-light:      #E9D39A;
+  --brass:            #C9A55A;
+  --brass-deep:       #9C7A36;
+  --brass-shine:      rgba(255, 246, 214, 0.55);
+  --brass-ink:        #2B1E0A;                    /* engraved text on brass  */
+  --brass-ink-soft:   #4A3714;
+
+  /* ---- Library shelf (pre-rendered 3D cover cut-outs) ---- */
+  --book-h:        clamp(190px, 24vw, 320px);     /* shared shelf height    */
+  --book-drop:     drop-shadow(0 14px 16px rgba(10, 26, 51, 0.18)); /* follows the cut-out alpha */
+  --shelf-shadow:  rgba(10, 26, 51, 0.22);        /* contact ellipse        */
+
+  /* ---- Nav surfaces ---- */
+  --nav-glass:     rgba(251, 248, 241, 0.88);     /* .scrolled bar           */
+  --nav-solid:     var(--cream);                  /* while the corridor is pinned: no blur */
+
+  /* ---- Shadows ---- */
+  --shadow-card:   0 2px 14px rgba(10, 26, 51, 0.08), 0 1px 3px rgba(10, 26, 51, 0.06);
+  --shadow-hover:  0 18px 48px rgba(10, 26, 51, 0.18), 0 6px 16px rgba(10, 26, 51, 0.10);
+  --shadow-gold:   0 10px 30px rgba(165, 129, 47, 0.28);
+  --shadow-book:   0 24px 50px rgba(10, 26, 51, 0.38);
+  --shadow-drawer: -20px 0 60px rgba(10, 26, 51, 0.20);
+
+  /* ---- Typography ---- */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body:    "EB Garamond", Georgia, serif;
+  --font-ui:      "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Fluid type scale */
+  --fs-hero:   clamp(3.4rem, 11vw, 9rem);
+  --fs-h2:     clamp(2.1rem, 5vw, 3.6rem);
+  --fs-h3:     clamp(1.35rem, 2.6vw, 1.9rem);
+  --fs-lead:   clamp(1.1rem, 1.8vw, 1.35rem);
+  --fs-body:   clamp(1.02rem, 1.4vw, 1.18rem);
+  --fs-small:  0.92rem;
+  --fs-eyebrow: 0.78rem;
+
+  --lh-tight:  1.04;
+  --lh-snug:   1.2;
+  --lh-body:   1.7;
+  --tracking-eyebrow: 0.26em;
+  --tracking-ui: 0.08em;
+  --hairline: 1px;
+
+  /* ---- Spacing & layout ---- */
+  --section-pad: clamp(4.5rem, 10vw, 8.5rem);
+  --container-w: 1200px;
+  --container-pad: clamp(1.25rem, 4vw, 2.5rem);
+  --gap: clamp(1rem, 2.5vw, 2rem);
+  --nav-height: 76px;
+
+  /* ---- Radii ---- */
+  --r-sm: 10px;
+  --r-md: 18px;
+  --r-lg: 28px;
+  --r-pill: 999px;
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 0.2s;
+  --t-med: 0.4s;
+  --t-slow: 0.7s;
+
+  /* ---- Texture ---- */
+  --wood-url: url("../assets/textures/wood.svg");
+}
+
+@media (max-width: 600px) {
+  :root { --nav-height: 64px; }
+}

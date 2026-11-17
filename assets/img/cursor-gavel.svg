@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Source art for cursor-gavel.png / cursor-gavel@2x.png (not loaded by the page).
+       Hotspot (9,2) sits on the upper striking face of the head.
+       Re-render: rsvg-convert -w 32 -h 32 cursor-gavel.svg > cursor-gavel.png
+                  rsvg-convert -w 64 -h 64 cursor-gavel.svg > cursor-gavel@2x.png -->
+  <g transform="translate(6.5 6.5) rotate(45)">
+    <!-- 1) cream halo behind everything (reads on navy sections) -->
+    <g fill="#FBF8F1" stroke="#FBF8F1" stroke-width="2.8" stroke-linejoin="round">
+      <rect x="0" y="-1.5" width="29" height="3" rx="1.5"/>
+      <rect x="-3.5" y="-5" width="7" height="10" rx="1.4"/>
+    </g>
+    <!-- 2) fills: gold-deep handle, navy head, gold-light bands -->
+    <rect x="0" y="-1.5" width="29" height="3" rx="1.5" fill="#A5812F"/>
+    <rect x="-3.5" y="-5" width="7" height="10" rx="1.4" fill="#16335F"/>
+    <rect x="-3.5" y="-3.4" width="7" height="1.3" fill="#E6C878"/>
+    <rect x="-3.5" y="2.1" width="7" height="1.3" fill="#E6C878"/>
+  </g>
+</svg>

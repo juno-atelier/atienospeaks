@@ -1,0 +1,179 @@
+/* ============================================================
+   global.css — Shared layout, typography, UI components,
+   reveal base state and utilities used across sections.
+   ============================================================ */
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--charcoal);
+  background: var(--cream);
+  overflow-x: hidden;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container-w);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-pad);
+}
+
+/* Section grounds */
+.section-cream { background: var(--cream); }
+.section-ivory { background: var(--ivory); }
+.section-white { background: var(--white); }
+.section-navy  { background: var(--navy-ink); color: var(--on-navy); }
+
+/* ---------- Typography ---------- */
+h1, h2, h3 { font-family: var(--font-display); color: var(--navy-primary); }
+.section-navy h1, .section-navy h2, .section-navy h3 { color: var(--white); }
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.section-navy .eyebrow { color: var(--gold-light); }
+.eyebrow::before {
+  content: "";
+  width: 2.2em;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.section-title {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  margin-top: 0.6rem;
+  letter-spacing: -0.01em;
+}
+.section-title em { font-style: italic; color: var(--gold-deep); }
+.section-navy .section-title em { color: var(--gold-light); }
+
+.lead {
+  font-size: var(--fs-lead);
+  color: var(--slate);
+  max-width: 54ch;
+}
+.section-navy .lead { color: var(--on-navy-soft); }
+
+.section-head { max-width: 62ch; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  --btn-bg: var(--gold);
+  --btn-fg: var(--navy-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.86rem;
+  letter-spacing: var(--tracking-ui);
+  padding: 0.95em 1.7em;
+  border-radius: var(--r-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  transition: transform var(--t-fast) var(--ease-out),
+              box-shadow var(--t-fast) var(--ease-out),
+              background var(--t-fast) var(--ease-out);
+  will-change: transform;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold); background: var(--gold-light); }
+.btn:active { transform: translateY(0); }
+.btn .btn-arrow { transition: transform var(--t-fast) var(--ease-out); }
+.btn:hover .btn-arrow { transform: translate(3px, -3px); }
+
+.btn-ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--navy-primary);
+  border: 1px solid var(--line);
+}
+.section-navy .btn-ghost { --btn-fg: var(--on-navy); border-color: var(--line-on-navy); }
+.btn-ghost:hover { background: var(--gold-veil); box-shadow: none; }
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--t-med) var(--ease-out),
+              box-shadow var(--t-med) var(--ease-out);
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+
+/* ---------- Reveal (progressive enhancement) ----------
+   Only hide pre-animation when scripting is available, so
+   no-JS visitors always see the content.                    */
+@media (scripting: enabled) {
+  [data-reveal] { opacity: 0; }
+  [data-reveal="up"]   { transform: translateY(28px); }
+  [data-reveal="fade"] { transform: none; }
+  .r-line { display: block; overflow: hidden; }
+  .r-line-inner { display: block; transform: translateY(110%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal], .r-line-inner { opacity: 1 !important; transform: none !important; }
+}
+
+/* ---------- Utilities ---------- */
+.u-gold { color: var(--gold-deep); }
+.section-navy .u-gold { color: var(--gold-light); }
+.u-center { text-align: center; }
+.u-mt-sm { margin-top: 1rem; }
+.u-mt-md { margin-top: 2rem; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Gavel cursor (fine pointers only) ----------
+   Literal url()s, not tokens: a var() inside `cursor` makes the
+   whole declaration invalid-at-computed-time instead of dropped at
+   parse time, which would defeat the url → image-set fallback
+   cascade below. Hotspot 9 2 = the gavel's striking face.
+   Touch / coarse pointers never match, so they are untouched.   */
+@media (hover: hover) and (pointer: fine) {
+  html, body,
+  a, button, [role="button"], label, summary, select {
+    cursor: url("../assets/img/cursor-gavel.png") 9 2, auto;
+    cursor: -webkit-image-set(url("../assets/img/cursor-gavel.png") 1x,
+                              url("../assets/img/cursor-gavel@2x.png") 2x) 9 2, auto;
+    cursor: image-set(url("../assets/img/cursor-gavel.png") 1x,
+                      url("../assets/img/cursor-gavel@2x.png") 2x) 9 2, auto;
+  }
+  /* Keep the I-beam wherever text is typed */
+  textarea, [contenteditable="true"],
+  input:not([type="button"], [type="submit"], [type="reset"], [type="checkbox"],
+            [type="radio"], [type="range"], [type="file"], [type="color"]) {
+    cursor: text;
+  }
+}
+/* High-contrast / forced colours: hand back the system cursors */
+@media (forced-colors: active) {
+  html, body { cursor: auto; }
+  a, button, [role="button"], label, summary, select { cursor: pointer; }
+}
+
+/* Thin gold divider */
+.rule-gold {
+  width: 64px; height: 2px; border: 0;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  margin: 1.4rem 0;
+}
+.u-center .rule-gold { margin-inline: auto; }

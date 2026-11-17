@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atienospeaks — A Voice With Purpose</title>
+  <meta name="description" content="Atienospeaks — the portfolio of a legal professional, writer and founder. Milestones, practice, enterprise, reflections and published books.">
+  <!-- [USER] replace with the real domain before deploying -->
+  <link rel="canonical" href="https://atienospeaks.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Atienospeaks — A Voice With Purpose">
+  <meta property="og:description" content="Advocate. Writer. Founder. A legal mind using the law and the written word to give voice to the unheard.">
+  <meta property="og:image" content="https://atienospeaks.com/assets/img/portrait.jpg">
+  <meta name="theme-color" content="#FBF8F1">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;0,900;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600;700&display=swap">
+
+  <!-- Styles (token-first layer order) -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/home.css">
+
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- [USER] JSON-LD: fill with real facts, then uncomment. Never ship invented data.
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Atieno …",
+    "jobTitle": "Advocate & Author",
+    "url": "https://atienospeaks.com/",
+    "sameAs": ["https://instagram.com/…", "https://linkedin.com/in/…"]
+  }
+  </script>
+  -->
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="site-nav" id="siteNav">
+    <nav class="nav-inner" aria-label="Primary">
+      <a class="nav-brand" href="#top" aria-label="Atienospeaks home">
+        <img src="assets/img/logo.webp" alt="Atienospeaks" width="1417" height="362">
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#journey">Journey</a>
+        <a href="#professional">Practice</a>
+        <a href="#business">Enterprise</a>
+        <a href="#reflections">Reflections</a>
+        <a href="#library">Library</a>
+        <a class="btn nav-cta" href="#contact">Get in touch</a>
+      </div>
+    </nav>
+  </header>
+  <div class="nav-scrim" id="navScrim" aria-hidden="true"></div>
+
+  <main id="top">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="hero" aria-label="Introduction">
+      <div class="container">
+        <div class="hero-copy">
+          <p class="eyebrow hero-eyebrow intro-item">A Voice With Purpose</p>
+          <h1 class="hero-title intro-item">Atieno<span class="t-speaks">speaks</span></h1>
+
+          <!-- Hand-drawn gold swoosh — micro.js draws the stroke on load -->
+          <svg class="hero-swoosh intro-item" viewBox="0 0 440 60" fill="none" aria-hidden="true">
+            <path d="M6,46 C120,6 300,6 434,32"/>
+          </svg>
+
+          <p class="hero-sub intro-item">
+            Advocate. Writer. Founder. A legal mind using the law — and the
+            written word — to give voice to the unheard.
+          </p>
+
+          <div class="hero-actions intro-item">
+            <a class="btn" href="#journey">Explore the journey <span class="btn-arrow" aria-hidden="true">↗</span></a>
+            <a class="btn btn-ghost" href="#reflections">Read reflections</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cut-out portrait: figure = micro.js intro fade, picture = parallax.js drift -->
+      <figure class="hero-portrait intro-item">
+        <picture data-parallax data-speed="0.06">
+          <source srcset="assets/img/atieno-cutout.webp" type="image/webp">
+          <img src="assets/img/atieno-cutout.png" alt="Atieno at her desk, writing." width="412" height="379" fetchpriority="high" decoding="async">
+        </picture>
+      </figure>
+    </section>
+
+    <!-- ===================== JOURNEY ===================== -->
+    <section class="section section-navy journey" id="journey" aria-label="The journey">
+      <div class="container">
+        <div class="journey-head">
+          <div class="section-head">
+            <p class="eyebrow" data-reveal="up">The Journey</p>
+            <h2 class="section-title" data-reveal="lines">Milestones that shaped <em>a voice</em></h2>
+          </div>
+          <p class="journey-progress" data-reveal="fade">Scroll to walk the hall ↓</p>
+        </div>
+      </div>
+
+      <!-- Corridor stage. journey.js (wide screens + motion allowed) adds
+           .is-corridor, pins this stage and dollies .corridor-world forward.
+           Otherwise the decor stays hidden and the list below renders as a
+           vertical framed gallery. Do not put data-reveal on the frames. -->
+      <div class="corridor">
+        <div class="corridor-world">
+          <div class="cor-ceiling" aria-hidden="true"></div>
+          <div class="cor-floor" aria-hidden="true"></div>
+          <div class="cor-wall cor-wall--left" aria-hidden="true"></div>
+          <div class="cor-wall cor-wall--right" aria-hidden="true"></div>
+          <div class="cor-chandelier" aria-hidden="true"></div>
+          <div class="cor-end" aria-hidden="true"><div class="cor-arch"></div></div>
+
+          <!-- [USER] replace years + titles with real milestones -->
+          <ol class="journey-track">
+            <li class="milestone">
+              <span class="frame-glow" aria-hidden="true"></span>
+              <article class="frame">
+                <div class="frame-bead">
+                  <div class="frame-matte">
+                    <!-- Photo slot (later): <img class="frame-photo" src="…" alt="…" width="…" height="…" loading="lazy"> -->
+                    <div class="frame-plaque">
+                      <p class="m-year">20—</p>
+                      <h3>The First Step</h3>
+                      <p class="m-cap">Enrolled to read law, where a lifelong sense of justice first found its language.</p>
+                    </div>
+                  </div>
+                </div>
+                <span class="frame-sweep" aria-hidden="true"></span>
+              </article>
+            </li>
+            <li class="milestone">
+              <span class="frame-glow" aria-hidden="true"></span>
+              <article class="frame">
+                <div class="frame-bead">
+                  <div class="frame-matte">
+                    <div class="frame-plaque">
+                      <p class="m-year">20—</p>
+                      <h3>Called to Practise</h3>
+                      <p class="m-cap">Admitted to the profession and took the first briefs that would define a career.</p>
+                    </div>
+                  </div>
+                </div>
+                <span class="frame-sweep" aria-hidden="true"></span>
+              </article>
+            </li>
+            <li class="milestone">
+              <span class="frame-glow" aria-hidden="true"></span>
+              <article class="frame">
+                <div class="frame-bead">
+                  <div class="frame-matte">
+                    <div class="frame-plaque">
+                      <p class="m-year">20—</p>
+                      <h3>Counsel &amp; Courtroom</h3>
+                      <p class="m-cap">Built a practice across [your practice areas], representing clients with diligence and heart.</p>
+                    </div>
+                  </div>
+                </div>
+                <span class="frame-sweep" aria-hidden="true"></span>
+              </article>
+            </li>
+            <li class="milestone">
+              <span class="frame-glow" aria-hidden="true"></span>
+              <article class="frame">
+                <div class="frame-bead">
+                  <div class="frame-matte">
+                    <div class="frame-plaque">
+                      <p class="m-year">20—</p>
+                      <h3>The Written Voice</h3>
+                      <p class="m-cap">Published the first book — turning lived cases and convictions into pages others could hold.</p>
+                    </div>
+                  </div>
+                </div>
+                <span class="frame-sweep" aria-hidden="true"></span>
+              </article>
+            </li>
+            <li class="milestone">
+              <span class="frame-glow" aria-hidden="true"></span>
+              <article class="frame">
+                <div class="frame-bead">
+                  <div class="frame-matte">
+                    <div class="frame-plaque">
+                      <p class="m-year">20—</p>
+                      <h3>Enterprise</h3>
+                      <p class="m-cap">Founded [your venture], extending the mission beyond the courtroom.</p>
+                    </div>
+                  </div>
+                </div>
+                <span class="frame-sweep" aria-hidden="true"></span>
+              </article>
+            </li>
+            <li class="milestone milestone--today">
+              <article class="frame frame--arch">
+                <div class="frame-bead">
+                  <div class="frame-matte">
+                    <div class="frame-plaque">
+                      <p class="m-year">Today</p>
+                      <h3>A Voice With Purpose</h3>
+                      <p class="m-cap">Advocacy, authorship and enterprise, carried as one practice.</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Letterbox: two thin bars, not a full-screen overlay (compositor cost) -->
+        <div class="cor-bar cor-bar--top" aria-hidden="true"></div>
+        <div class="cor-bar cor-bar--bottom" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ===================== PROFESSIONAL ===================== -->
+    <section class="section section-cream" id="professional" aria-label="The professional">
+      <div class="container">
+        <div class="professional-grid">
+          <figure class="pro-figure" data-reveal="up">
+            <picture>
+              <source srcset="assets/img/portrait.webp" type="image/webp">
+              <img src="assets/img/portrait.jpg" alt="Atieno, advocate and author" width="771" height="662" loading="lazy">
+            </picture>
+            <!-- [USER] current role -->
+            <figcaption class="pro-badge">Now · <b>[Your Current Role]</b></figcaption>
+          </figure>
+
+          <div class="pro-text">
+            <p class="eyebrow" data-reveal="up">The Professional</p>
+            <h2 class="section-title" data-reveal="lines">Where rigour meets <em>clarity</em></h2>
+            <hr class="rule-gold">
+            <p class="lead" data-reveal="up">
+              Today, Atieno practises with a focus on [your practice areas] —
+              pairing careful legal reasoning with a writer's gift for making the
+              complex plain. [Replace this paragraph with a short note on your
+              current role and the work you are proudest of.]
+            </p>
+            <ul class="pro-list" data-reveal="up">
+              <li><span class="tick" aria-hidden="true">✓</span><span><b>Advisory &amp; representation</b> across [areas of law].</span></li>
+              <li><span class="tick" aria-hidden="true">✓</span><span><b>Legal writing</b> that translates the technical into the human.</span></li>
+              <li><span class="tick" aria-hidden="true">✓</span><span><b>Advocacy</b> for [the causes and communities you serve].</span></li>
+            </ul>
+            <a class="btn u-mt-sm" href="#contact" data-reveal="up">Work with me <span class="btn-arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BUSINESS ===================== -->
+    <section class="section section-white" id="business" aria-label="The enterprise">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" data-reveal="up">The Enterprise</p>
+          <h2 class="section-title" data-reveal="lines">Building beyond <em>the bar</em></h2>
+          <p class="lead u-mt-sm" data-reveal="up">Ventures where the same purpose takes new form — [replace with a line about your entrepreneurial work].</p>
+        </div>
+
+        <!-- [USER] replace venture names + copy -->
+        <div class="ventures">
+          <article class="card venture" data-reveal="up">
+            <div class="v-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.2 7.3-8 9-4.8-1.7-8-4.5-8-9V7l8-4z"/></svg>
+            </div>
+            <h3>Legal Practice</h3>
+            <p>[Your chambers or firm] — client advisory, representation and counsel grounded in diligence.</p>
+            <a class="v-link" href="#contact">Learn more <span class="btn-arrow" aria-hidden="true">↗</span></a>
+          </article>
+          <article class="card venture" data-reveal="up">
+            <div class="v-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 5h11a3 3 0 013 3v11M4 5v14h13M4 5a2 2 0 00-2 2v12a2 2 0 002 2"/></svg>
+            </div>
+            <h3>Atienospeaks Publishing</h3>
+            <p>Books, essays and the written voice — [describe your authorship and publishing work].</p>
+            <a class="v-link" href="#library">See the library <span class="btn-arrow" aria-hidden="true">↗</span></a>
+          </article>
+          <article class="card venture" data-reveal="up">
+            <div class="v-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 11l18-7-7 18-2.5-7L3 11z"/></svg>
+            </div>
+            <h3>Speaking &amp; Mentorship</h3>
+            <p>Talks, training and mentorship for the next generation — [describe your speaking work].</p>
+            <a class="v-link" href="#contact">Invite me <span class="btn-arrow" aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== REFLECTIONS ===================== -->
+    <section class="section reflections" id="reflections" aria-label="Reflections on life and faith">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" data-reveal="up">Reflections</p>
+          <h2 class="section-title" data-reveal="lines">On life, faith <em>&amp; purpose</em></h2>
+        </div>
+
+        <!-- [USER] replace with your own reflections / blog snippets -->
+        <div class="reflection-grid">
+          <blockquote class="reflection" data-reveal="up">
+            <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+            <p>The law gives us rules; faith gives us reasons. I try to practise where the two meet.</p>
+            <cite class="r-source">Reflection No. 01</cite>
+          </blockquote>
+          <blockquote class="reflection" data-reveal="up">
+            <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+            <p>Every brief I write begins the way a prayer does — with listening.</p>
+            <cite class="r-source">Reflection No. 02</cite>
+          </blockquote>
+          <blockquote class="reflection" data-reveal="up">
+            <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+            <p>Purpose is not found in the verdict, but in whose voice you chose to carry.</p>
+            <cite class="r-source">Reflection No. 03</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== LIBRARY ===================== -->
+    <section class="section library" id="library" aria-label="The library of books">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" data-reveal="up">The Library</p>
+          <h2 class="section-title" data-reveal="lines">Four books, <em>one voice</em></h2>
+          <p class="lead u-mt-sm" data-reveal="up">Four books by Advocate Atieno Ogolla — on justice, faith and the road to the Bar.</p>
+        </div>
+
+        <div class="books">
+          <article class="book" data-reveal="up">
+            <!-- Ready for a link later: wrap everything inside .book in
+                 <a class="book-link" href="…"> (styles + focus ring exist). -->
+            <div class="book-tilt">
+              <div class="book-cover">
+                <picture>
+                  <source srcset="assets/img/books/adr-african-justice.webp" type="image/webp">
+                  <img src="assets/img/books/adr-african-justice.png" alt="The Role of ADR in African Justice Systems — From Tradition to Modernity, by Advocate Atieno Ogolla" width="367" height="560" loading="lazy" decoding="async">
+                </picture>
+              </div>
+            </div>
+            <span class="book-shelf" aria-hidden="true"></span>
+            <div class="book-meta"><h3>The Role of ADR in African Justice Systems</h3><p class="b-sub">From Tradition to Modernity</p></div>
+          </article>
+          <article class="book" data-reveal="up">
+            <div class="book-tilt">
+              <div class="book-cover">
+                <picture>
+                  <source srcset="assets/img/books/in-his-court.webp" type="image/webp">
+                  <img src="assets/img/books/in-his-court.png" alt="In His Court — A Year-Long Devotion for Lawyers, by Advocate Atieno Ogolla" width="357" height="560" loading="lazy" decoding="async">
+                </picture>
+              </div>
+            </div>
+            <span class="book-shelf" aria-hidden="true"></span>
+            <div class="book-meta"><h3>In His Court</h3><p class="b-sub">A Year-Long Devotion for Lawyers</p></div>
+          </article>
+          <article class="book" data-reveal="up">
+            <div class="book-tilt">
+              <div class="book-cover">
+                <picture>
+                  <source srcset="assets/img/books/beyond-the-books.webp" type="image/webp">
+                  <img src="assets/img/books/beyond-the-books.png" alt="Beyond the Books — The Law Student&#8217;s Guide to Passing the Bar, by Advocate Atieno Ogolla" width="399" height="560" loading="lazy" decoding="async">
+                </picture>
+              </div>
+            </div>
+            <span class="book-shelf" aria-hidden="true"></span>
+            <div class="book-meta"><h3>Beyond the Books</h3><p class="b-sub">The Law Student&#8217;s Guide to Passing the Bar</p></div>
+          </article>
+          <article class="book" data-reveal="up">
+            <div class="book-tilt">
+              <div class="book-cover">
+                <picture>
+                  <source srcset="assets/img/books/365-days-to-success.webp" type="image/webp">
+                  <img src="assets/img/books/365-days-to-success.png" alt="365 Days to Success — Lawyer in Progress, by Advocate Atieno Ogolla" width="442" height="560" loading="lazy" decoding="async">
+                </picture>
+              </div>
+            </div>
+            <span class="book-shelf" aria-hidden="true"></span>
+            <div class="book-meta"><h3>365 Days to Success</h3><p class="b-sub">Lawyer in Progress</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT CTA ===================== -->
+    <section class="section section-navy cta-band" id="contact" aria-label="Get in touch">
+      <div class="container">
+        <p class="eyebrow" data-reveal="up" style="justify-content:center">Get in touch</p>
+        <h2 class="section-title" data-reveal="lines">Let's give it <em>a voice</em></h2>
+        <p class="lead" data-reveal="up">For briefs, books, talks or collaboration — [replace with a warm invitation to connect].</p>
+        <div class="cta-actions" data-reveal="up">
+          <!-- [USER] real email + socials -->
+          <a class="btn" href="mailto:hello@atienospeaks.com">Email me <span class="btn-arrow" aria-hidden="true">↗</span></a>
+          <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/img/logo.webp" alt="Atienospeaks" width="1417" height="362">
+          <p>A voice with purpose — law, letters and enterprise in the service of the unheard.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 3.3.15 4.8 1.7 4.95 4.95.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.15 3.25-1.65 4.8-4.95 4.95-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-3.3-.15-4.8-1.7-4.95-4.95C2.08 15.6 2.07 15.2 2.07 12s0-3.6.07-4.9C2.29 3.85 3.79 2.3 7.1 2.15 8.4 2.09 8.8 2.08 12 2.08zm0 1.8c-3.14 0-3.5 0-4.74.07-2.4.1-3.2.95-3.3 3.3C3.9 8.5 3.9 8.8 3.9 12s0 3.5.06 4.74c.1 2.35.9 3.2 3.3 3.3 1.24.06 1.6.07 4.74.07s3.5 0 4.74-.07c2.4-.1 3.2-.95 3.3-3.3.06-1.24.07-1.6.07-4.74s0-3.5-.07-4.74c-.1-2.35-.9-3.2-3.3-3.3C15.5 4 15.14 4 12 4zm0 3.1a4.9 4.9 0 110 9.8 4.9 4.9 0 010-9.8zm0 1.8a3.1 3.1 0 100 6.2 3.1 3.1 0 000-6.2zm5.1-.9a1.15 1.15 0 110 2.3 1.15 1.15 0 010-2.3z"/></svg></a>
+            <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.9 2.3h3.3l-7.2 8.2 8.5 11.2h-6.7l-5.2-6.8-6 6.8H1.3l7.7-8.8L0.8 2.3h6.9l4.7 6.2 5.5-6.2zm-1.2 17.7h1.8L6.4 4.1H4.5l13.2 15.9z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3V9zm6 0h3.8v1.7h.05c.53-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21H9V9z"/></svg></a>
+            <a href="mailto:hello@atienospeaks.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M2 5h20v14H2V5zm2 2v.5l8 5 8-5V7H4zm16 2.8l-8 5-8-5V17h16V9.8z"/></svg></a>
+          </div>
+        </div>
+
+        <nav class="footer-col" aria-label="Explore">
+          <h4>Explore</h4>
+          <a href="#journey">Journey</a>
+          <a href="#professional">Practice</a>
+          <a href="#business">Enterprise</a>
+          <a href="#reflections">Reflections</a>
+          <a href="#library">Library</a>
+        </nav>
+
+        <nav class="footer-col" aria-label="Connect">
+          <h4>Connect</h4>
+          <a href="#contact">Get in touch</a>
+          <a href="mailto:hello@atienospeaks.com">hello@atienospeaks.com</a>
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Atienospeaks. All rights reserved.</span>
+        <span class="tagline">A Voice With Purpose</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button class="to-top" id="toTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <!-- Libraries (self-hosted, expose window globals) -->
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="vendor/anime.min.js"></script>
+  <!-- App entry (ES module, self-registering plugin architecture) -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

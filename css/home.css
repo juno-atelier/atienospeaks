@@ -1,0 +1,594 @@
+/* ============================================================
+   home.css — The six landing sections
+   Hero · Journey · Professional · Business · Reflections · Library
+   (plus the contact CTA band)
+   ============================================================ */
+
+/* ===================== HERO ===================== */
+/* Light editorial hero: cream ground, navy ink, a warm gold glow
+   pooling behind a bottom-faded cut-out portrait that bleeds off
+   the bottom-right edge. The sections below stay navy; a gold
+   hairline softens the seam into #journey.                      */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-top: var(--nav-height);
+  background:
+    radial-gradient(48% 62% at 80% 74%, var(--glow-gold), transparent 70%),
+    radial-gradient(34% 40% at 96% 18%, var(--glow-blue), transparent 72%),
+    var(--cream);
+  color: var(--hero-ink);
+  overflow: hidden;
+  isolation: isolate;
+}
+/* Gold hairline on the cream → navy seam */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: var(--hairline);
+  background: var(--hairline-gold);
+  z-index: 3;
+  pointer-events: none;
+}
+.hero .container { position: relative; z-index: 2; width: 100%; }
+
+.hero-copy { max-width: 680px; }
+
+/* Hero intro items are hidden pre-animation only when JS can run,
+   so no-JS visitors still see the hero. micro.js staggers them in. */
+@media (scripting: enabled) {
+  .intro-item { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-item { opacity: 1 !important; transform: none !important; }
+}
+
+.hero-eyebrow { margin-bottom: 1.4rem; }
+
+.hero-title {
+  font-size: var(--fs-hero);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--hero-ink);
+  font-weight: 800;
+}
+.hero-title .t-speaks { font-style: italic; font-weight: 500; color: var(--hero-accent); }
+
+/* Hand-drawn gold swoosh under the title */
+.hero-swoosh { width: min(440px, 80%); height: auto; margin: 0.4rem 0 1.6rem; overflow: visible; }
+.hero-swoosh path {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.hero-sub {
+  font-size: var(--fs-lead);
+  color: var(--hero-ink-soft);
+  max-width: 46ch;
+  margin-bottom: 2rem;
+}
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+/* Cut-out portrait: anchored bottom-right, bleeding off the edge,
+   faded into the cream by a bottom mask. The <figure> carries the
+   micro.js intro stagger; the inner <picture> carries the GSAP
+   parallax drift — separate elements so the two transforms never
+   overwrite each other.                                          */
+.hero-portrait {
+  position: absolute;
+  right: clamp(-5rem, -4vw, -1rem);
+  bottom: 0;
+  z-index: 1;
+  height: min(88svh, 780px);
+  aspect-ratio: 412 / 379;
+  pointer-events: none;
+}
+.hero-portrait picture { display: block; height: 100%; }
+.hero-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right bottom;
+  -webkit-mask-image: var(--mask-fade);
+          mask-image: var(--mask-fade);
+}
+
+/* ≤900px: the cut-out sits behind the copy; the subhead gets a
+   translucent cream chip so it stays legible over the photo.     */
+@media (max-width: 900px) {
+  .hero { align-items: flex-start; padding-top: calc(var(--nav-height) + 2rem); }
+  .hero-portrait {
+    height: min(70svh, 560px);
+    right: clamp(-6rem, -12vw, -2rem);
+  }
+  .hero-sub {
+    display: inline-block;
+    background: var(--cream-chip);
+    padding: 0.7rem 1rem;
+    border-radius: var(--r-sm);
+    -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+  }
+}
+
+/* ===================== JOURNEY ===================== */
+/* Two modes, ONE markup:
+   • Base (≤760px, reduced motion, no JS): a vertical gallery of
+     gold-framed brass plaques. Corridor decor is hidden.
+   • .is-corridor (added by journey.js only when motion is allowed
+     on wide screens): a one-point-perspective courthouse hall that
+     journey.js pins and dollies forward. The media query lives in
+     journey.js only, so CSS and JS can never disagree.            */
+.journey {
+  /* Hall geometry — journey.js reads --hall-first/-step/-dolly. */
+  --hall-persp: 800px;    /* camera lens                           */
+  --hall-depth: 3000px;   /* doorway distance                      */
+  --hall-first: 400px;    /* depth of the first frame              */
+  --hall-step:  500px;    /* spacing between frames (alternating)  */
+  --hall-dolly: 2250px;   /* how far the camera walks              */
+  --frame-w: min(100%, 520px);
+  --letterbox-h: 4vh;
+
+  background: var(--corridor-ground);
+  overflow: hidden;
+  /* Own stacking context above the following sections, so they are not
+     promoted to compositor layers for "overlapping" the pinned scene. */
+  position: relative;
+  z-index: 1;
+}
+.journey .section-head { margin-bottom: 0; }
+.journey-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; }
+.journey-progress {
+  font-family: var(--font-ui); font-size: 0.74rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--on-navy-soft);
+}
+.journey:not(.is-corridor) .journey-progress { display: none; }
+
+/* ---------- Base: vertical framed gallery ---------- */
+.corridor {
+  position: relative;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-inline: var(--container-pad);
+}
+.cor-ceiling, .cor-floor, .cor-wall, .cor-chandelier, .cor-end,
+.cor-bar, .frame-glow, .frame-sweep { display: none; }
+
+.journey-track {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: var(--frame-w);
+  display: grid;
+  gap: clamp(1.75rem, 5vw, 2.5rem);
+}
+.milestone { position: relative; }
+.milestone:nth-child(odd)  { transform: translateX(-2%); }
+.milestone:nth-child(even) { transform: translateX(2%); }
+
+/* ---------- The gold frame (shared by both modes) ---------- */
+.frame {
+  position: relative;
+  overflow: hidden;
+  padding: 10px;                                 /* outer moulding  */
+  border-radius: 3px;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold) 28%,
+              var(--gold-deep) 52%, var(--gold) 74%, var(--gold-light));
+  box-shadow: inset 0 0 0 1px var(--frame-edge), var(--frame-shadow);
+}
+.frame-bead {                                     /* inner beading   */
+  padding: 5px;
+  border: 3px dotted var(--frame-beading);
+  background: var(--frame-liner);
+}
+.frame-matte {                                    /* 2nd gold line   */
+  border: 1px solid var(--gold-light);
+  padding: 1.4em;
+  background: radial-gradient(ellipse at 50% 35%, var(--frame-matte-lift), var(--frame-matte));
+}
+/* Photo slot, ready for later: <img class="frame-photo"> above the plaque */
+.frame-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-bottom: 1em;
+  border: 1px solid var(--gold-deep);
+}
+
+/* Brass plaque: year, title, caption */
+.frame-plaque {
+  padding: 1em 1.1em;
+  text-align: center;
+  border-radius: 2px;
+  color: var(--brass-ink);
+  background: linear-gradient(160deg, var(--brass-light), var(--brass) 45%, var(--brass-deep));
+  box-shadow: inset 0 1px 0 var(--brass-shine), inset 0 -1px 0 var(--brass-deep);
+}
+.frame-plaque .m-year {
+  font-family: var(--font-display);
+  font-size: 1.9em;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--brass-ink);
+}
+.frame-plaque h3 {
+  font-size: 1.3em;
+  line-height: 1.2;
+  margin: 0.35em 0 0.4em;
+  color: var(--brass-ink);
+  text-shadow: 0 1px 0 var(--brass-shine);
+}
+.frame-plaque .m-cap {
+  font-size: 0.95em;
+  line-height: 1.5;
+  color: var(--brass-ink-soft);
+}
+
+/* "Today" — an arched, glowing plaque (the doorway in corridor mode) */
+.milestone.milestone--today { transform: none; }   /* beats :nth-child offsets */
+.frame--arch { border-radius: 999px 999px 4px 4px; }
+.frame--arch .frame-bead,
+.frame--arch .frame-matte { border-radius: 999px 999px 2px 2px; }
+.frame--arch .frame-matte {
+  padding: 3.2em 1.4em 1.6em;
+  background: radial-gradient(ellipse at 50% 75%, var(--arch-core), var(--arch-glow) 55%, var(--arch-rim));
+}
+.frame--arch .frame-plaque { background: none; box-shadow: none; }
+
+/* ---------- Corridor mode (journey.js adds .is-corridor) ---------- */
+.journey.is-corridor { padding-bottom: 0; }
+.journey.is-corridor .corridor {
+  height: 100svh;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: 0;
+  overflow: hidden;
+  perspective: var(--hall-persp);
+  perspective-origin: 50% 46%;
+  container-type: size;            /* cqw / cqh for frame placement */
+  background: var(--corridor-ground);
+  --frame-w: clamp(280px, 26vw, 380px);
+}
+.journey.is-corridor .corridor-world,
+.journey.is-corridor .journey-track {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;    /* no overflow/filter/opacity here */
+}
+.journey.is-corridor .journey-track { display: block; margin: 0; max-width: none; }
+.journey.is-corridor :is(.cor-ceiling, .cor-floor, .cor-wall, .cor-chandelier, .cor-end, .cor-bar, .frame-glow, .frame-sweep) {
+  display: block;
+}
+
+/* Floor: aged parquet + gold runner, laid flat into the depth */
+.cor-floor {
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%;
+  height: var(--hall-depth);
+  transform-origin: 50% 100%;
+  transform: rotateX(90deg);
+  background:
+    linear-gradient(0deg, var(--plane-shade), transparent 18%),          /* baked vignette (near end) */
+    linear-gradient(90deg, transparent 39%, var(--runner-edge) 39% 39.5%,
+                    var(--runner) 39.5% 60.5%, var(--runner-edge) 60.5% 61%, transparent 61%),
+    repeating-linear-gradient(90deg, transparent 0 58px, var(--parquet-seam) 58px 60px),
+    repeating-linear-gradient(180deg, transparent 0 178px, var(--parquet-seam) 178px 180px),
+    repeating-linear-gradient(90deg, var(--parquet-a) 0 60px, var(--parquet-b) 60px 120px),
+    var(--wood-url) 0 0 / 420px;
+}
+
+/* Ceiling: coffered grid + chandelier pool */
+.cor-ceiling {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  height: var(--hall-depth);
+  transform-origin: 50% 0;
+  transform: rotateX(-90deg);
+  background:
+    linear-gradient(180deg, var(--plane-shade), transparent 18%),        /* baked vignette (near end) */
+    radial-gradient(40% 18% at 50% 45%, var(--chandelier-glow), transparent 70%),
+    repeating-linear-gradient(90deg, var(--coffer-line) 0 8px, transparent 8px 240px),
+    repeating-linear-gradient(180deg, var(--coffer-line) 0 8px, transparent 8px 240px),
+    var(--ceiling);
+}
+
+/* Side walls: same rotation for both (the right one shows its back
+   face, mirrored — fine, it has no text). Local x runs near → far,
+   so the 500px tiles line pilasters + sconces up with --hall-step. */
+.cor-wall {
+  position: absolute;
+  top: 0;
+  width: var(--hall-depth);
+  height: 100%;
+  transform-origin: 0 50%;
+  transform: rotateY(90deg);
+  background:
+    linear-gradient(90deg, var(--plane-shade), transparent 18%),         /* baked vignette (near end) */
+    radial-gradient(60px 110px at 150px 32%, var(--sconce-glow), transparent 70%) 0 0 / 500px 100% repeat-x,
+    linear-gradient(90deg, transparent 120px, var(--pilaster-shade) 120px 126px,
+                    var(--pilaster) 126px 174px, var(--pilaster-shade) 174px 180px, transparent 180px)
+                    0 0 / 500px 100% repeat-x,
+    linear-gradient(180deg, transparent 62%, var(--wainscot-line) 62% 62.4%, transparent 62.4% 64%,
+                    var(--wainscot-line) 64% 64.3%, var(--wainscot) 64.3%),
+    linear-gradient(90deg, var(--wall), var(--wall-far));
+}
+.cor-wall--left  { left: 0; }
+.cor-wall--right { left: 100%; }
+
+/* Chandelier glow hanging mid-hall */
+.cor-chandelier {
+  position: absolute;
+  left: 50%; top: 6%;
+  width: 320px; height: 320px;
+  margin-left: -160px;
+  transform: translateZ(-1650px);
+  background: radial-gradient(circle, var(--chandelier-core) 0 6%, var(--chandelier-glow) 16%, transparent 62%);
+}
+
+/* Back wall + arched glowing doorway at the vanishing point */
+.cor-end {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(calc(var(--hall-depth) * -1));
+  background:
+    radial-gradient(ellipse 40% 50% at 50% 64%, var(--arch-halo), transparent 70%),
+    radial-gradient(ellipse 90% 85% at 50% 56%, var(--haze), transparent 72%),   /* haze, was a full-screen overlay */
+    var(--wall-far);
+}
+.cor-arch {
+  position: absolute;
+  left: 33%; bottom: 0;
+  width: 34%; height: 72%;
+  border: 6px solid var(--arch-rim);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  background: radial-gradient(ellipse at 50% 70%, var(--arch-core), var(--arch-glow) 60%, var(--arch-rim));
+}
+
+/* Framed milestones hung at receding depths, alternating walls */
+.journey.is-corridor .milestone {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: var(--frame-w);
+  font-size: 1.1rem;
+  --fy: -4cqh;
+  --fz: calc((var(--hall-first) + var(--i) * var(--hall-step)) * -1);
+  transform: translate(-50%, -50%) translate3d(var(--fx), var(--fy), var(--fz)) rotateY(var(--fr));
+}
+.journey.is-corridor .milestone:nth-child(1) { --i: 0; }
+.journey.is-corridor .milestone:nth-child(2) { --i: 1; }
+.journey.is-corridor .milestone:nth-child(3) { --i: 2; }
+.journey.is-corridor .milestone:nth-child(4) { --i: 3; }
+.journey.is-corridor .milestone:nth-child(5) { --i: 4; }
+.journey.is-corridor .milestone:nth-child(odd)  { --fx: calc(-50cqw + var(--frame-w) * 0.45); --fr: 30deg; }
+.journey.is-corridor .milestone:nth-child(even) { --fx: calc(50cqw - var(--frame-w) * 0.45);  --fr: -30deg; }
+
+/* Spotlight + light sweep (opacity / transform only, driven by journey.js) */
+.frame-glow {
+  position: absolute;
+  inset: -35% -25%;
+  background: radial-gradient(closest-side, var(--spotlight), transparent);  /* fades before the box edge */
+  opacity: 0;
+  pointer-events: none;
+}
+.frame-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, var(--light-sweep) 50%, transparent 65%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+/* "Today" floats inside the glowing arch */
+.journey.is-corridor .milestone--today {
+  top: 64%;
+  width: calc(34cqw * 0.7);
+  font-size: 1.9rem;
+  transform: translate(-50%, -50%) translateZ(calc(var(--hall-depth) * -1 + 4px));
+}
+.journey.is-corridor .frame--arch,
+.journey.is-corridor .frame--arch .frame-bead,
+.journey.is-corridor .frame--arch .frame-matte {
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* Letterbox bars (outside the 3D world). Vignette + haze now live in the
+   scene's own backgrounds and the grain was dropped: a full-screen
+   transparent overlay cost 21% (DPR1) / 44% (DPR2) of GPU draw time. */
+.cor-bar {
+  position: absolute;
+  left: 0; right: 0;
+  height: var(--letterbox-h);
+  background: var(--letterbox);
+  pointer-events: none;
+}
+.cor-bar--top    { top: 0; }
+.cor-bar--bottom { bottom: 0; }
+
+/* ===================== PROFESSIONAL ===================== */
+.professional-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.pro-figure {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-hover);
+}
+.pro-figure img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; aspect-ratio: 5 / 4; }   /* near-square studio portrait: head + crossed arms */
+.pro-figure .pro-badge {
+  position: absolute; left: 1.2rem; bottom: 1.2rem;
+  background: var(--navy-ink); color: var(--on-navy);
+  border: 1px solid var(--gold);
+  border-radius: var(--r-pill);
+  padding: 0.6em 1.1em;
+  font-family: var(--font-ui); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.pro-figure .pro-badge b { color: var(--gold-light); font-weight: 700; }
+
+.pro-list { margin-top: 1.8rem; display: grid; gap: 1.1rem; }
+.pro-list li {
+  display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: start;
+  font-size: var(--fs-small); color: var(--slate);
+}
+.pro-list .tick {
+  width: 26px; height: 26px; flex: none;
+  display: grid; place-items: center;
+  border-radius: var(--r-pill);
+  background: var(--gold-veil); color: var(--gold-deep);
+  font-size: 0.8rem;
+}
+.pro-list b { color: var(--navy-primary); font-family: var(--font-ui); font-weight: 600; }
+
+@media (max-width: 860px) { .professional-grid { grid-template-columns: 1fr; } }
+
+/* ===================== BUSINESS ===================== */
+.ventures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+.venture { padding: clamp(1.8rem, 3vw, 2.4rem); display: flex; flex-direction: column; gap: 0.9rem; }
+.venture .v-icon {
+  width: 54px; height: 54px;
+  display: grid; place-items: center;
+  border-radius: var(--r-sm);
+  background: var(--navy-ink); color: var(--gold-light);
+}
+.venture .v-icon svg { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+.venture h3 { font-size: var(--fs-h3); }
+.venture p { color: var(--slate); font-size: var(--fs-small); }
+.venture .v-link {
+  margin-top: auto;
+  font-family: var(--font-ui); font-weight: 600; font-size: 0.78rem;
+  letter-spacing: 0.06em; color: var(--gold-deep);
+  display: inline-flex; align-items: center; gap: 0.4em;
+}
+.venture .v-link .btn-arrow { transition: transform var(--t-fast) var(--ease-out); }
+.venture:hover .v-link .btn-arrow { transform: translate(3px, -3px); }
+
+@media (max-width: 860px) { .ventures { grid-template-columns: 1fr; } }
+
+/* ===================== REFLECTIONS ===================== */
+.reflections {
+  position: relative;
+  color: var(--on-navy);
+  isolation: isolate;
+}
+.reflections::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -2;
+  background: var(--wood-url) center/420px repeat;
+}
+.reflections::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, var(--wood-overlay), rgba(8,18,38,0.9));
+}
+.reflections .section-head { margin-inline: auto; text-align: center; }
+.reflection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+}
+.reflection {
+  background: rgba(10, 26, 51, 0.55);
+  border: 1px solid var(--line-on-navy);
+  border-radius: var(--r-md);
+  padding: clamp(1.8rem, 3vw, 2.4rem);
+  backdrop-filter: blur(3px);
+}
+.reflection .quote-mark {
+  font-family: var(--font-display);
+  font-size: 3.5rem; line-height: 0.6; color: var(--gold);
+  display: block; height: 1.4rem;
+}
+.reflection p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--fs-h3);
+  color: var(--white);
+  margin: 1rem 0;
+  line-height: 1.4;
+}
+.reflection .r-source {
+  font-family: var(--font-ui); font-size: 0.72rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--gold-light);
+}
+@media (max-width: 860px) { .reflection-grid { grid-template-columns: 1fr; } }
+
+/* ===================== LIBRARY ===================== */
+/* The covers are pre-rendered 3D cut-outs (spine, angle and shadow are
+   in the image), so no CSS fake-3D here: they stand on a shared shelf
+   height, each keeping its own aspect ratio, bottom-aligned. library.js
+   adds a gentle lift + ~5° tilt on fine pointers only.               */
+.library { background: var(--ivory); }
+.books {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(2rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.5rem);
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  align-items: start;
+}
+.book {
+  position: relative;
+  perspective: 900px;              /* per card: each tilts around its own centre */
+}
+/* Future per-book link (wraps the .book contents) */
+.book-link { display: block; color: inherit; border-radius: var(--r-sm); }
+.book-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 6px; }
+
+.book-tilt {
+  position: relative;
+  z-index: 1;                      /* above the contact shadow */
+  transform-origin: 50% 100%;      /* tilt from the shelf line */
+  will-change: transform;
+}
+.book-cover {
+  height: var(--book-h);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.book-cover picture { display: block; width: 100%; height: 100%; }
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 100%;       /* stand on the shelf */
+  filter: var(--book-drop);        /* static: never animated */
+}
+/* Soft contact shadow on the shelf; library.js shrinks/fades it on lift */
+.book-shelf {
+  display: block;
+  width: 72%;
+  height: 16px;
+  margin: -10px auto 0;
+  background: radial-gradient(closest-side, var(--shelf-shadow), transparent);
+}
+.book-meta { margin-top: 1rem; text-align: center; }
+.book-meta h3 { font-size: 1.05rem; color: var(--navy-primary); line-height: 1.25; }
+.book-meta .b-sub { font-family: var(--font-ui); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-deep); margin-top: 0.4rem; }
+
+/* 2×2 on tablets and phones (no single-column step) */
+@media (max-width: 860px) { .books { grid-template-columns: repeat(2, 1fr); } }
+
+/* ===================== CONTACT CTA BAND ===================== */
+.cta-band { text-align: center; }
+.cta-band .section-title { margin-inline: auto; }
+.cta-band .lead { margin: 1rem auto 2rem; }
+.cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.9rem; }

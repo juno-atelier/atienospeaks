@@ -1,0 +1,156 @@
+/* ============================================================
+   navbar.css — Site navigation only (sticky bar + mobile drawer)
+   The hero is light (cream), so the bar reads dark-on-light from
+   scroll 0: navy logo (no invert), navy links, gold CTA.
+   .scrolled only adds the frosted glass + hairline so the bar
+   separates from whatever section scrolls beneath it.
+
+   NEVER put backdrop-filter / filter / transform / perspective /
+   will-change / contain on .site-nav (or .nav-inner): any of them
+   makes the bar the containing block for position:fixed children,
+   which traps the mobile drawer (.nav-links) inside the 64px bar.
+   The frosted glass lives on .site-nav::before instead — a
+   pseudo-element is not an ancestor of the drawer.
+   ============================================================ */
+
+.site-nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;                    /* also its own stacking context for ::before */
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  transition: box-shadow var(--t-med) var(--ease-out);
+}
+/* Glass layer: sits behind the bar's content, inside the bar */
+.site-nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+  transition: background var(--t-med) var(--ease-out),
+              backdrop-filter var(--t-med) var(--ease-out);
+}
+.site-nav.scrolled { box-shadow: 0 1px 0 var(--line); }
+.site-nav.scrolled::before {
+  background: var(--nav-glass);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+}
+/* While the #journey corridor is pinned (journey.js toggles the body
+   class), drop the blur: re-blurring the moving 3D scene every frame
+   cost 10% (DPR1) / 28% (DPR2) of GPU draw time. */
+.corridor-pinned .site-nav.scrolled::before {
+  background: var(--nav-solid);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: var(--container-w);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Brand — navy wordmark shown as-is on the light hero */
+.nav-brand { display: flex; align-items: center; height: 100%; }
+.nav-brand img {
+  height: clamp(26px, 3.4vw, 34px);
+  width: auto;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.2vw, 2rem);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.nav-links a {
+  position: relative;
+  color: var(--hero-ink);
+  padding-block: 0.4em;
+  transition: color var(--t-fast) var(--ease-out);
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-med) var(--ease-out);
+}
+.nav-links a:hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--gold-deep); }
+
+/* Gold CTA keeps its own .btn colours (navy text on gold) */
+.nav-links a.nav-cta { color: var(--btn-fg); margin-left: 0.5rem; }
+.nav-links a.nav-cta::after { content: none; }
+
+/* Hamburger */
+.nav-toggle {
+  display: none;
+  width: 44px; height: 44px;
+  position: relative;
+  z-index: 110;
+}
+.nav-toggle span {
+  position: absolute;
+  left: 11px; right: 11px;
+  height: 2px;
+  background: var(--hero-ink);
+  transition: transform var(--t-med) var(--ease-out),
+              opacity var(--t-fast) var(--ease-out);
+}
+.nav-toggle span:nth-child(1) { top: 16px; }
+.nav-toggle span:nth-child(2) { top: 22px; }
+.nav-toggle span:nth-child(3) { top: 28px; }
+.nav-open .nav-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* ---------- Mobile drawer ---------- */
+@media (max-width: 860px) {
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(82vw, 340px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.6rem;
+    padding: var(--nav-height) 2rem 2rem;
+    background: var(--cream);
+    box-shadow: var(--shadow-drawer);
+    transform: translateX(100%);
+    transition: transform var(--t-slow) var(--ease-out);
+    font-size: 1.15rem;
+  }
+  .nav-open .nav-links { transform: translateX(0); }
+  .nav-links a.nav-cta { margin-left: 0; }
+
+  /* Dim backdrop */
+  .nav-scrim {
+    position: fixed; inset: 0;
+    background: var(--navy-veil);
+    opacity: 0; visibility: hidden;
+    transition: opacity var(--t-med) var(--ease-out), visibility var(--t-med);
+    z-index: 99;
+  }
+  .nav-open .nav-scrim { opacity: 1; visibility: visible; }
+}
